@@ -6,10 +6,15 @@
 export function createGetter(path) {
   path = path.split('.');
 
-  // Не успел :(
+  let pathIndex = 0;
 
-  return (obj) => {
-
-
+  const traverseObj = obj => {
+    const child = obj[path[pathIndex]];
+      
+    if (typeof child === "object") return (++pathIndex && traverseObj(child));
+    
+    return (setTimeout(() => pathIndex = 0) && child)
   };
+
+  return traverseObj;
 }
