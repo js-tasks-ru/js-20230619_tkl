@@ -16,6 +16,11 @@ export function invertObj(obj = undefined) {
     return value;
   };
 
-  return  obj === undefined ? undefined :
-          Object.fromEntries(Object.entries(obj).map(([key, value]) => [validatePrimitive(value), key]));
+  if (obj === undefined) {
+    return undefined;
+  }
+
+  return Object.fromEntries(
+    Object.entries(obj).map(([key, value]) => [validatePrimitive(value), key])
+  );
 }
